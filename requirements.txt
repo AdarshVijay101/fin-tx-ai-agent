@@ -1,0 +1,4 @@
+pyodbc
+python-dotenv
+PyYAML
+openai>=1.30.0

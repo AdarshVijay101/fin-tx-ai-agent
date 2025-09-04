@@ -1,0 +1,20 @@
+# secrets
+.env
+app/.env
+*.sqlite
+
+# python cache & junk
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# logs
+*.log
+monitor_audit.csv
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,55 @@
+# app/error_playbook.yml
+# Map errors to probes and guidance. Keep it short & extensible.
+
+defaults:
+  max_rows: 50
+  time_window_min: 15
+
+errors:
+  # BUSINESS: Insufficient funds
+  50003:
+    label: Insufficient funds
+    severity: low
+    audience: [ops, support, product]
+    probes: []     # no DB probes; handled at business layer
+    guidance:
+      - "Verify source account balance & pending holds before retry."
+      - "Prevent auto-retries; surface clear message to user."
+      - "Notify support with transaction id/ref and timestamp."
+
+  # SYSTEM: duplicate key
+  2601:
+    label: Duplicate key
+    severity: medium
+    audience: [eng, dba]
+    probes: [dup_key_sample, index_info]
+    guidance:
+      - "Identify constraint/index firing; show sample dup values."
+      - "Confirm upstream idempotency/ref uniqueness."
+  2627:
+    label: Unique constraint violation
+    severity: medium
+    audience: [eng, dba]
+    probes: [dup_key_sample, index_info]
+    guidance:
+      - "Same as 2601."
+
+  # SYSTEM: deadlock
+  1205:
+    label: Deadlock
+    severity: high
+    audience: [eng, dba]
+    probes: [recent_deadlocks, top_blocking, hot_objects]
+    guidance:
+      - "Review deadlock graph; add proper index/ordering."
+      - "Shorten transactions; consistent lock order; retry policy."
+
+  # LOGIN failed (common when rotating creds)
+  18456:
+    label: Login failed
+    severity: medium
+    audience: [dba, eng]
+    probes: [failed_logins]
+    guidance:
+      - "Check SQL auth mode, login state, default db, password policy."
+      - "Confirm app connection string; rotate secrets if needed."

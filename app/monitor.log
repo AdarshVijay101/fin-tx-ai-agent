@@ -1,0 +1,34 @@
+
+=== FinTx Monitor @ 2025-08-28 16:02:25.054341Z ===
+Traceback (most recent call last):
+  File "D:\DATA_ENGINEER\PROJECTS\NOTEBOOKS\finance-tx\app\monitor_errors.py", line 88, in <module>
+    rows = fetch_new_errors(last)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\DATA_ENGINEER\PROJECTS\NOTEBOOKS\finance-tx\app\monitor_errors.py", line 36, in fetch_new_errors
+    with get_conn() as c:
+         ^^^^^^^^^^
+  File "D:\DATA_ENGINEER\PROJECTS\NOTEBOOKS\finance-tx\app\monitor_errors.py", line 21, in get_conn
+    def get_conn(): return pyodbc.connect(CONN_STR, autocommit=True, timeout=30)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pyodbc.InterfaceError: ('28000', "[28000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Login failed for user 'app_user'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Login failed for user 'app_user'. (18456)")
+
+=== FinTx Monitor @ 2025-08-29 17:48:38.093088Z ===
+No new ErrorLog rows.
+HealthCheck: OK
+Done.
+Traceback (most recent call last):
+  File "D:\DATA_ENGINEER\PROJECTS\NOTEBOOKS\finance-tx\app\monitor_errors.py", line 4, in <module>
+    import pyodbc
+ModuleNotFoundError: No module named 'pyodbc'
+
+=== FinTx Monitor @ 2025-09-03 16:35:12.671393Z ===
+
+*** New ErrorLog entries ***
+5: [usp_TransferFunds] #50003 @ 2025-09-01 00:12:43.804000 -> Insufficient funds
+6: [usp_TransferFunds] #50003 @ 2025-09-01 00:27:45.039000 -> Insufficient funds
+7: [usp_TransferFunds] #50003 @ 2025-09-01 01:03:38.264000 -> Insufficient funds
+8: [usp_TransferFunds] #50003 @ 2025-09-01 17:44:19.193000 -> Insufficient funds
+9: [usp_TransferFunds] #50003 @ 2025-09-01 17:45:33.253000 -> Insufficient funds
+10: [usp_TransferFunds] #50003 @ 2025-09-02 03:10:27.307000 -> Insufficient funds
+HealthCheck: OK
+Done.
